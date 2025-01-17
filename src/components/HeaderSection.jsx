@@ -22,7 +22,7 @@ const HeaderSection = () => {
       {/* Botones de redes sociales */}
       <div className="absolute top-5 right-8 flex space-x-4 z-20">
         <a
-          href="https://wa.me/123456789"
+          href="https://wa.me/51903327694?text=Hola%2C%20me%20encantaría%20recibir%20más%20información%20sobre%20los%20polos%20oficiales%20y%20los%20detalles%20del%20evento%20TrujilloEsCarnaval.%20Estoy%20interesado%20en%20ser%20parte%20de%20esta%20experiencia%20única.%20¡Gracias!"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-white p-2 rounded-full hover:bg-gray-200 transition"
@@ -30,7 +30,7 @@ const HeaderSection = () => {
           <FaWhatsapp className="w-5 h-5" style={{ color: "black" }} />
         </a>
         <a
-          href="https://instagram.com"
+          href="https://www.instagram.com/trujilloescarnaval?igsh=ejhhcWczcGd0cnpt&utm_source=qr"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-white p-2 rounded-full hover:bg-gray-200 transition"
@@ -38,7 +38,7 @@ const HeaderSection = () => {
           <FaInstagram className="w-5 h-5" style={{ color: "black" }} />
         </a>
         <a
-          href="https://facebook.com"
+          href="https://www.facebook.com/share/15vzEWmfb6/?mibextid=wwXIfr"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-white p-2 rounded-full hover:bg-gray-200 transition"

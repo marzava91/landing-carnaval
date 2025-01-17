@@ -14,7 +14,7 @@ const VotingSection = () => {
           Ayúdanos a elegir el logo de este año:
         </h2>
         <a
-          href="https://instagram.com"
+          href="https://www.instagram.com/p/DE2wu0NP12X/?igsh=MW9jNmMyMjd6dWJ6ZA=="
           target="_blank"
           rel="noopener noreferrer"
           className="text-sm underline block mt-1" // Agregado block para nuevo renglón y espacio

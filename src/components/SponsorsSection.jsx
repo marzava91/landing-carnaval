@@ -33,7 +33,7 @@ const SponsorsSection = () => {
       {/* Contenido */}
       <div className="mt-8 text-center">
         <a
-          href="https://www.mijimarket.com"
+          href="https://wa.me/51903327694?text=Hola%2C%20estoy%20interesado%20en%20ser%20parte%20del%20evento%20TrujilloEsCarnaval%20como%20auspiciador.%20Me%20gustaría%20recibir%20información%20sobre%20las%20oportunidades%20y%20beneficios%20de%20auspiciar%20este%20gran%20evento.%20¡Gracias!"
           target="_blank"
           rel="noopener noreferrer"
         >

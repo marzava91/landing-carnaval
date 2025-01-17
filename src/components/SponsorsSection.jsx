@@ -52,7 +52,7 @@ const SponsorsSection = () => {
         >
           Descarga su app móvil{" "}
           <a
-            href="https://play.google.com/store/apps/details?id=com.mujimarket"
+            href="https://play.google.com/store/apps/details?id=com.mijimarkets.onlinestore&pcampaignid=web_share"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-500 underline"

@@ -426,7 +426,7 @@ const OrderForm = () => {
         to: "zavaleta.marvin@gmail.com", // Reemplaza con tu correo de administrador
         subject: `NUEVO PEDIDO DE ${cantidadTotal} POLOS`,
         body: `
-          <p><strong>Hemos recibido un nuevo pedido.</strong></p>
+          <p>Hemos recibido un nuevo pedido de <strong>${formData.nombre}</strong>.</p>
           <p>Total: <strong>S/ ${total.toFixed(2)}</strong></p>
         `,
       });

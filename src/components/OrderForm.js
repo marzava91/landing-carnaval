@@ -241,8 +241,7 @@ const OrderForm = () => {
       if (!response.ok) {
         throw new Error('No se pudo enviar el correo.');
       }
-
-      alert('¡Pedido enviado con éxito!');
+      
     } catch (error) {
       console.error('Error al enviar el correo:', error);
       alert('Hubo un error al enviar el correo.');
@@ -407,7 +406,7 @@ const OrderForm = () => {
       });
       
 
-      toast.success("¡Pedido enviado con éxito!");
+      toast.success("¡Pedido enviado con éxito! Te hemos enviado un correo electrónico con el detalle del pedido, no olvides buscarlo también en correo no deseado.");
 
       resetForm();
     } catch (error) {

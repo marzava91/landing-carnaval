@@ -21,6 +21,8 @@ const OrderForm = () => {
   const [showSummaryDialog, setShowSummaryDialog] = useState(false); // Estado para mostrar el resumen del pedido
   const [orderSummaryContent, setOrderSummaryContent] = useState(null); // Contenido del resumen del pedido
   const [loading, setLoading] = useState(false); 
+  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
+
   
   // Calcular automáticamente el total cuando cambien las tallas
   useEffect(() => {
@@ -139,7 +141,6 @@ const OrderForm = () => {
     };
   };
   
-
   const calcularTotal = () => {
     const precios = calcularPrecios(); // Obtén los precios dinámicos
     const nuevoTotal = formData.tallas.reduce((sum, item) => {
@@ -148,8 +149,7 @@ const OrderForm = () => {
   
     setTotal(nuevoTotal);
   };
-  
-  
+    
   const obtenerOpcionesDisponibles = (index) => {
     const seleccionadas = formData.tallas
       .map((item, i) => (i !== index ? item.talla : null))
@@ -180,7 +180,6 @@ const OrderForm = () => {
 
     setArchivos((prev) => [...prev, ...archivosValidos]);
   };
-
 
   const eliminarArchivo = (index) => {
     setArchivos((prev) => prev.filter((_, i) => i !== index));
@@ -213,7 +212,7 @@ const OrderForm = () => {
       .join("\n");
 
     const resumen = (
-      <div className="text-left">
+      <div className="text-left" style={{ color: "#000" }}>
         <p><strong>Nombre Completo:</strong> {formData.nombre}</p>
         <p><strong>Correo Electrónico:</strong> {formData.correo}</p>
         <p><strong>Teléfono:</strong> {formData.telefono}</p>
@@ -227,7 +226,6 @@ const OrderForm = () => {
     setShowSummaryDialog(true); // Mostrar el diálogo
   };
 
-  // Agrega sendEmail al principio
   const sendEmail = async (emailContent) => {
     try {
       const response = await fetch('/api/send-email', {
@@ -241,7 +239,7 @@ const OrderForm = () => {
       if (!response.ok) {
         throw new Error('No se pudo enviar el correo.');
       }
-      
+
     } catch (error) {
       console.error('Error al enviar el correo:', error);
       alert('Hubo un error al enviar el correo.');
@@ -259,18 +257,34 @@ const OrderForm = () => {
     setTotal(0);
     setShowSummaryDialog(false);
   };
+
+  const ConfirmationDialog = () => (
+    <div
+      className="bg-white p-6 rounded-lg shadow-lg max-w-md text-center relative"
+      style={{ fontFamily: "'Nunito', sans-serif" }} // Aplicar fuente Nunito
+    >
+      <h2 className="text-2xl font-bold text-[#5B3571] mb-4">¡Felicidades!</h2>
+      <h2 className="text-2xl font-bold text-[#5B3571] mb-4">¡Hemos recibido tu pedido!</h2>
+      <p className="text-lg text-[#5B3571]">
+        Te hemos enviado un correo electrónico con todos los detalles de tu pedido.
+        Es posible que este correo te haya llegado a tu bandeja de no deseados.
+      </p>
+      <button
+        onClick={() => setShowConfirmationDialog(false)}
+        className="mt-6 bg-[#FFCE19] text-[#5B3571] py-2 px-4 rounded-full font-bold hover:bg-[#f0b517] transition-colors"
+      >
+        Cerrar
+      </button>
+    </div>
+  );
   
-  // Actualiza handleConfirmOrder
   const handleConfirmOrder = async () => {
     console.log("Confirmando pedido...");
     
     try {
 
-      // Cerrar el diálogo de resumen
-      setShowSummaryDialog(false);
-
-      // Mostrar un indicador de carga (spinner)
-      setLoading(true);
+      setShowSummaryDialog(false);// Cerrar el diálogo de resumen
+      setLoading(true); // Mostrar un indicador de carga (spinner)
       console.log("Subiendo archivos...");
   
       // Subir archivos adjuntos y obtener los URLs
@@ -405,9 +419,23 @@ const OrderForm = () => {
         `,
       });
       
+      // Enviar correo al administrador
+      console.log("Enviando correo al administrador...");
+      const cantidadTotal = formData.tallas.reduce((sum, talla) => sum + talla.cantidad, 0);
+      await sendEmail({
+        to: "zavaleta.marvin@gmail.com", // Reemplaza con tu correo de administrador
+        subject: `NUEVO PEDIDO DE ${cantidadTotal} POLOS`,
+        body: `
+          <p><strong>Hemos recibido un nuevo pedido.</strong></p>
+          <p>Total: <strong>S/ ${total.toFixed(2)}</strong></p>
+        `,
+      });
 
-      toast.success("¡Pedido enviado con éxito! Te hemos enviado un correo electrónico con el detalle del pedido, no olvides buscarlo también en correo no deseado.");
+      console.log("Correos enviados.");
 
+      // Muestra el diálogo de confirmación
+      setShowConfirmationDialog(true);
+      
       resetForm();
     } catch (error) {
       console.error("Error durante la confirmación:", error);
@@ -478,7 +506,6 @@ const OrderForm = () => {
     // Si todo es válido, mostrar el resumen
     handleSummaryDialog();
   };
-  
   
 
   return (
@@ -828,6 +855,13 @@ const OrderForm = () => {
             </button>
           </div>
         </div>
+      </div>
+    )}
+
+    {/* Modal/Dialog de Pedido enviado */}
+    {showConfirmationDialog && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <ConfirmationDialog />
       </div>
     )}
     </section>

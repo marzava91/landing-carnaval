@@ -6,7 +6,7 @@ const PricesSection = () => {
   const current = new Date(currentDate);
 
   // Fechas de los rangos
-  const preVentaEnd = new Date("2025-01-26T23:59:59-05:00"); // Hasta el 26 de enero
+  const preVentaEnd = new Date("2025-02-02T23:59:59-05:00"); // Hasta el 26 de enero
   const ventaEnd = new Date("2025-02-16T23:59:59-05:00"); // Hasta el 16 de febrero
 
   // Determinar el precio vigente

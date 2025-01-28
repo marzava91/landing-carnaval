@@ -118,11 +118,11 @@ const OrderForm = () => {
 
   const calcularPrecios = () => {
     const hoy = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Lima" }));
-    const fecha26Enero = new Date("2025-01-26T23:59:59-05:00");
+    const fecha02Febrero = new Date("2025-02-02T23:59:59-05:00");
     const fecha16Febrero = new Date("2025-02-16T23:59:59-05:00");
   
     let precioBase;
-    if (hoy <= fecha26Enero) {
+    if (hoy <= fecha02Febrero) {
       precioBase = 45;
     } else if (hoy <= fecha16Febrero) {
       precioBase = 50;
@@ -198,11 +198,22 @@ const OrderForm = () => {
     return urls;
   };
   
+  const validStatuses = ["pendiente", "aprobado", "rechazado", "entregado"];
+
   const saveOrder = async (orderData) => {
+    if (!validStatuses.includes("pendiente")) {
+      throw new Error("Estado no válido para el pedido");
+    }
+
     const db = getFirestore();
     const ordersCollection = collection(db, "orders");
-    const docRef = await addDoc(ordersCollection, orderData);
-    return docRef.id; // Devuelve el ID del documento creado
+
+    const docRef = await addDoc(ordersCollection, {
+      ...orderData,
+      status: "pendiente", // Se garantiza que es un valor válido
+    });
+
+    return docRef.id;
   };
   
   const handleSummaryDialog = () => {
@@ -320,7 +331,7 @@ const OrderForm = () => {
         })),
         total: total.toFixed(2),
         documents: documentUrls,
-        validated: false,
+        status: "pendiente",
       };
 
       console.log("Guardando pedido en Firestore...");

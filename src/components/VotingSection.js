@@ -12,7 +12,7 @@ const VotingSection = () => {
             src="/polo-carnavalero.png"
             alt="Polo Carnavalero"
             className="max-w-full object-contain"
-            style={{ width: "1024px", height: "auto" }} // Ajusta el tamaño si es necesario
+            style={{ width: "1200px", height: "auto" }} // Ajusta el tamaño si es necesario
           />
         </a>
       </div>

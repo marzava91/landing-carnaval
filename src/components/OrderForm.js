@@ -198,10 +198,10 @@ const OrderForm = () => {
     return urls;
   };
   
-  const validStatuses = ["pendiente", "aprobado", "rechazado", "entregado"];
+  const validStatuses = ["Pendiente", "Aprobado", "Rechazado", "Entregado"];
 
   const saveOrder = async (orderData) => {
-    if (!validStatuses.includes("pendiente")) {
+    if (!validStatuses.includes("Pendiente")) {
       throw new Error("Estado no válido para el pedido");
     }
 
@@ -210,7 +210,7 @@ const OrderForm = () => {
 
     const docRef = await addDoc(ordersCollection, {
       ...orderData,
-      status: "pendiente", // Se garantiza que es un valor válido
+      status: "Pendiente", // Se garantiza que es un valor válido
     });
 
     return docRef.id;
@@ -331,7 +331,7 @@ const OrderForm = () => {
         })),
         total: total.toFixed(2),
         documents: documentUrls,
-        status: "pendiente",
+        status: "Pendiente",
       };
 
       console.log("Guardando pedido en Firestore...");

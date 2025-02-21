@@ -28,7 +28,6 @@ export default function Home() {
       <VotingSection />
       <BenefitsSection />
       <PricesSection />
-      <OrderForm />
       <SponsorsSection /> 
       <GallerySection />
       <FooterSection /> 
